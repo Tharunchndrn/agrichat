@@ -39,7 +39,7 @@ cd Backend
 
 # Install dependencies
 pip install -r requirements.txt
-pip install torchvision # Required for the local vision model
+pip install torchvision # Required for the local vision models
 ```
 
 ### 3. Configuration

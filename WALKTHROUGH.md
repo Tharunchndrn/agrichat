@@ -6,7 +6,7 @@ A full-stack Gemini-powered chatbot inside the `agrichat` project:
 
 | Layer | Tech | File |
 |-------|------|------|
-| Backend | FastAPI + `google-genai` SDK | [main.py](file:///c:/Users/Taruni/Desktop/Agrichatbot/agrichat/Backend/main.py) |
+| Backend | FastAPI + `google-genai` SDK | [main.py](file:///c:/Users/Taruni/Desktop/Agrichatbot/agrichat/Backend/main..py) |
 | Frontend | HTML + CSS + JS | [index.html](file:///c:/Users/Taruni/Desktop/Agrichatbot/agrichat/Frontend/index.html) |
 | Styling | Dark glassmorphism theme | [style.css](file:///c:/Users/Taruni/Desktop/Agrichatbot/agrichat/Frontend/style.css) |
 | Logic | Fetch API, typing indicator | [script.js](file:///c:/Users/Taruni/Desktop/Agrichatbot/agrichat/Frontend/script.js) |
