@@ -4,6 +4,12 @@ AgriChat is a state-of-the-art, multimodal AI platform designed to empower local
 
 ---
 
+### 🌐 Live Demo & Source
+[![Vercel](https://img.shields.io/badge/Live_Demo-Vercel-black?style=for-the-badge&logo=vercel)](https://agrichat-eta.vercel.app/)
+[![GitHub](https://img.shields.io/badge/Source_Code-GitHub-181717?style=for-the-badge&logo=github)](https://github.com/Tharunchndrn/agrichat.git)
+
+---
+
 ## ✨ Key Features
 
 - **🔬 Autonomous Disease Diagnosis**: Upload a photo of a sick plant, and our local **ResNet50 Vision Model** (trained on 38+ PlantVillage categories) will identify the health issue with high confidence.
@@ -16,12 +22,14 @@ AgriChat is a state-of-the-art, multimodal AI platform designed to empower local
 
 ## 🛠️ Technology Stack
 
-- **Frontend**: Vanilla HTML5, CSS3 (Glassmorphism Header/Input), JavaScript (ES6+), Inter Font.
-- **Backend**: FastAPI, Uvicorn, Python 3.10+.
-- **AI/ML**: 
-  - **Vision**: PyTorch, Transformers (ResNet50), Pillow.
-  - **LLM**: Google Gemini 2.5 Flash (via `google-generativeai`).
-  - **Data**: Hugging Face `datasets` library.
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
+![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white)
+![Google Gemini](https://img.shields.io/badge/Google%20Gemini-8E75B2?style=for-the-badge&logo=google%20gemini&logoColor=white)
+![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-FFD21E?style=for-the-badge)
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 
 ---
 
