@@ -68,7 +68,10 @@ AgriChat is extensible! You can fine-tune the vision model with your own data or
 ```bash
 python train.py
 ```
-This script pulls the **PlantVillage** dataset from Hugging Face and performs supervised fine-tuning to further specialize the model.
+**Verification Note**:
+- The script pulls the **PlantVillage** dataset from Hugging Face.
+- **Technical Fix**: Automatically handles "Unrecognized image processor" issues by falling back to `microsoft/resnet-50`.
+- **Output**: The specialized weights are saved in `Backend/plant_disease_model_final/`.
 
 ---
 
@@ -79,7 +82,7 @@ AgriChat uses a sophisticated hybrid approach to ensure accuracy:
 1. **User Uploads Image**: The frontend sends the image + message to the FastAPI backend.
 2. **Local Inference**: The **ResNet50 model** classifies the disease locally for high scientific precision.
 3. **LLM Synthesis**: The prediction is passed to **Gemini 2.5 Flash**, which acts as a conversational layer to provide "human-readable" expert advice and step-by-step treatments.
-4. **Final Response**: The farmer receives a comprehensive agricultural report.
+4. **Final Response**: The farmer receives a comprehensive agricultural report grounded in local model data.
 
 ---
 
