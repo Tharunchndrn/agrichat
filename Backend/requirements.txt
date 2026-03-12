@@ -9,3 +9,6 @@ pillow
 datasets
 accelerate
 torchvision
+mlflow
+scikit-learn
+pandas
