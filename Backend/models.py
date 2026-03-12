@@ -11,6 +11,7 @@ class AgriChatModels:
         # Gemini Configuration
         self.gemini_model_name = "gemini-2.5-flash"
         self.system_instruction = (
+            
             "You are AgriChat, a specialist Plant Pathologist and agricultural expert. "
             "Your core mission is to help farmers diagnose plant diseases and provide actionable treatments. "
             "\n\nHow you work: "
