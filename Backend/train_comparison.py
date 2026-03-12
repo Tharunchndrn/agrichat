@@ -23,6 +23,7 @@ from torchvision.transforms import (
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support
 import numpy as np
 import argparse
+from balance_dataset import get_balanced_indices
 
 def compute_metrics(eval_pred):
     logits, labels = eval_pred
@@ -39,7 +40,7 @@ def compute_metrics(eval_pred):
         'recall': recall
     }
 
-def train_model(model_id, dataset, training_args_dict, run_name):
+def train_model(model_id, dataset, training_args_dict, run_name, train_ds, val_ds):
     # Load Model & Processor
     print(f"\n[{run_name}] Loading Model: {model_id}...")
     processor = AutoImageProcessor.from_pretrained(model_id)
@@ -75,12 +76,9 @@ def train_model(model_id, dataset, training_args_dict, run_name):
         return examples
 
     # Prepare splits
-    # User requested a "fair amount" - using 5000 for training, 500 for validation
-    train_ds = dataset["train"].shuffle(seed=42).select(range(min(len(dataset["train"]), 5000)))
-    val_ds = dataset["train"].shuffle(seed=43).select(range(500)) # Simple split for demo
+    # train_ds and val_ds are already selected and transformed
     
-    train_ds.set_transform(apply_transforms)
-    val_ds.set_transform(apply_transforms)
+    # MLflow tracking
 
     # MLflow tracking
     with mlflow.start_run(run_name=run_name):
@@ -148,8 +146,24 @@ if __name__ == "__main__":
         "EfficientNetB0": "google/efficientnet-b0"
     }
 
+    # Get balanced indices
+    # We'll take 150 per class and use 100 for training, 50 for validation
+    print("Sampling balanced dataset...")
+    all_indices = get_balanced_indices(samples_per_class=150)
+    
+    # Split indices (simple shuffle and split)
+    np.random.seed(42)
+    np.random.shuffle(all_indices)
+    
+    num_train = int(len(all_indices) * 0.7)
+    train_indices = all_indices[:num_train]
+    val_indices = all_indices[num_train:]
+    
+    train_ds_sampled = dataset["train"].select(train_indices)
+    val_ds_sampled = dataset["train"].select(val_indices)
+
     for name, m_id in models_to_train.items():
         try:
-            train_model(m_id, dataset, common_args, name)
+            train_model(m_id, dataset, common_args, name, train_ds_sampled, val_ds_sampled)
         except Exception as e:
             print(f"Error training {name}: {e}")
