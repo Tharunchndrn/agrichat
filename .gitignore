@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+ENV/
+
+# MLflow
+mlruns/
+mlflow.db
+
+# Large Model Checkpoints
+results_*/
+plant_disease_model/
+*.pt
+*.pth
+*.bin
+
+# Keep the final model but ignore extra training states
+plant_disease_model_final/optimizer.pt
+plant_disease_model_final/rng_state.pth
+plant_disease_model_final/scheduler.pt
+plant_disease_model_final/trainer_state.json
+plant_disease_model_final/training_args.bin
+
+# OS
+.DS_Store
+Thumbs.db
