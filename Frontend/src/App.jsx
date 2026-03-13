@@ -144,10 +144,6 @@ function App() {
                         <span className="result-label">Identified Condition:</span>
                         <span className="result-value highlighted">{msg.disease}</span>
                       </div>
-                      <div className="result-row">
-                        <span className="result-label">System Confidence:</span>
-                        <span className="result-value">{(msg.confidence * 100).toFixed(2)}%</span>
-                      </div>
                     </div>
                   )}
                 </div>
