@@ -9,8 +9,8 @@ from models import AgriChatModels
 # Load environment variables
 load_dotenv()
 
-# Initialize AgriChat Models (Gemini + Local Vision)
-print("Initializing AgriChat AI Engine...")
+# Initialize AgriChat Models (Hybrid Tiered Engine)
+print("Initializing AgriChat Multi-Model AI Engine...")
 agri_models = AgriChatModels()
 
 # Create FastAPI app

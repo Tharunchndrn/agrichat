@@ -21,14 +21,12 @@ class AgriChatModels:
             "4. If no specific disease is identified, use your multimodal vision capability (Gemini) to analyze the image."
         )
         
-        # Local Model Configuration (Default to ResNet50 for now)
+        # Local Model Configuration
         self.local_model_path = "./plant_disease_model_final"
-        # Fallback if local path doesn't exist
-        self.fallback_hf_model = "mesabo/agri-plant-disease-resnet50"
         
         self.gemini_model = None
-        self.resnet_model = None
-        self.resnet_processor = None
+        self.vision_model = None
+        self.vision_processor = None
         
         self.initialize_gemini()
         self.initialize_local_model()
@@ -46,36 +44,34 @@ class AgriChatModels:
             print("Warning: GEMINI_API_KEY not found. Gemini will not be available.")
 
     def initialize_local_model(self):
-        print("Loading local vision model...")
-        model_to_load = self.local_model_path if os.path.exists(self.local_model_path) else self.fallback_hf_model
+        print("Initializing AgriChat Vision Engine...")
         
-        try:
-            self.resnet_model = AutoModelForImageClassification.from_pretrained(model_to_load)
+        if os.path.exists(self.local_model_path):
             try:
-                self.resnet_processor = AutoImageProcessor.from_pretrained(model_to_load)
-            except Exception:
-                 # Fallback processor
-                self.resnet_processor = AutoImageProcessor.from_pretrained("microsoft/resnet-50")
-            
-            self.resnet_model.eval()
-            print(f"Successfully loaded local model from: {model_to_load}")
-        except Exception as e:
-            print(f"Error loading local vision model: {e}")
+                print(f"Loading MobileNetV2 Model from {self.local_model_path}...")
+                self.vision_model = AutoModelForImageClassification.from_pretrained(self.local_model_path)
+                self.vision_processor = AutoImageProcessor.from_pretrained(self.local_model_path)
+                self.vision_model.eval()
+                print("✅ Success: MobileNetV2 is active.")
+            except Exception as e:
+                print(f"❌ Critical: Failed to load vision model: {e}")
+        else:
+            print(f"❌ Error: Model directory not found at {self.local_model_path}")
 
     async def predict(self, message: str, image_bytes: Optional[bytes] = None, image_mime_type: Optional[str] = None) -> str:
         diagnosis_context = ""
         user_image_parts = None
 
-        if image_bytes and self.resnet_model and self.resnet_processor:
+        if image_bytes and self.vision_model and self.vision_processor:
             try:
                 pil_image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
-                inputs = self.resnet_processor(images=pil_image, return_tensors="pt")
+                inputs = self.vision_processor(images=pil_image, return_tensors="pt")
                 with torch.no_grad():
-                    outputs = self.resnet_model(**inputs)
+                    outputs = self.vision_model(**inputs)
                     probs = torch.nn.functional.softmax(outputs.logits, dim=-1)
                     predicted_idx = probs.argmax(-1).item()
                     confidence = probs[0][predicted_idx].item()
-                    label = self.resnet_model.config.id2label[predicted_idx]
+                    label = self.vision_model.config.id2label[predicted_idx]
                     
                     if confidence > 0.4:
                         diagnosis_context = f"\n[Vision Scanner Result]: {label} (Confidence: {confidence*100:.2f}%)"
