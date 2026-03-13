@@ -9,7 +9,6 @@ ENV/
 
 # MLflow
 mlruns/
-mlflow.db
 
 # Large Model Checkpoints
 results_*/
