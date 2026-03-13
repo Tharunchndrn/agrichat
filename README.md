@@ -24,11 +24,7 @@ AgriChat is a professional, multimodal AI platform designed to empower farmers w
 To ensure the best user experience for farmers, we conducted a rigorous comparative study between three architectures using **MLflow** for experiment tracking.
 
 ### 🧪 Benchmarking Results
-````carousel
-![MLflow Experiment Logs](assets/mlflow_results.png)
-<!-- slide -->
-![MLflow Parallel Coordinates Plot](assets/mlflow_parallel_plot.PNG)
-````
+![Model Architecture Comparison](assets/mlflow_parallel_plot.PNG)
 
 | Model Architecture | Accuracy | Precision | Recall | F1-Score | Latency (CPU) |
 |---|---|---|---|---|---|
@@ -40,6 +36,24 @@ To ensure the best user experience for farmers, we conducted a rigorous comparat
 - **Recall (0.84)**: Critical for agricultural safety (minimizing missed diseases).
 - **Inference Speed**: 400ms ensures a "living" chat experience.
 - **Efficiency**: Optimized for CPU/Mobile deployment in low-connectivity zones.
+
+---
+
+## 📁 Project Structure
+
+```text
+agrichat/
+├── Backend/                # FastAPI Application & ML Core
+│   ├── main.py             # API Endpoints
+│   ├── models.py           # Gemini & Computer Vision logic
+│   ├── train.py            # Model training script
+│   └── mlflow.db           # Experiment tracking database
+├── frontend/               # React + Vite Application
+│   ├── src/                # UI Components (React)
+│   └── App.css             # Premium Styling
+├── assets/                 # Documentation & Presentation media
+└── Presentation_Guide.md   # Recruiter demo script
+```
 
 ---
 
@@ -59,24 +73,12 @@ To ensure the best user experience for farmers, we conducted a rigorous comparat
 
 ---
 
-## 🏗️ Architecture: Hybrid AI Flow
-
-AgriChat uses a sophisticated hybrid approach to ensure scientific accuracy:
-
-1. **Visual Attention (Grad-CAM)**: Generates a heatmap overlay to show diagnostic focus.
-2. **Local Inference**: MobileNetV2 classifies the disease locally for speed and privacy.
-3. **LLM Synthesis**: Gemini Flash provides "human-readable" expert advice and treatments.
-4. **Final Response**: Comprehensive report with side-by-side image comparisons.
-
----
-
 ## 🚀 Getting Started
 
 ### 1. Backend Setup
 ```bash
 cd Backend
 pip install -r requirements.txt
-# Add your GEMINI_API_KEY to .env
 python main.py
 ```
 
