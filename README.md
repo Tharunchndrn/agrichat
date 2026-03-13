@@ -24,6 +24,16 @@ AgriChat is a professional, multimodal AI platform designed to empower farmers w
 
 ---
 
+## ✨ Key Features
+
+- **🔬 Autonomous Disease Diagnosis**: Upload a photo of a plant leaf, and our local vision model (trained on 38 categories) identifies the health issue instantly.
+- **👁️ Explainable AI (Grad-CAM)**: Visual attention heatmaps highlight the specific areas of the leaf the AI focused on for its diagnosis, building trust and transparency.
+- **🌱 Expert AI Persona**: Integrated with a **Plant Pathologist** persona for professional treatment plans (Biological, Chemical, and Cultural) and prevention tips.
+- **💬 Professional Chat Interface**: A modern React-based chat UI with distinct messaging bubbles, side-by-side diagnosis comparisons, and premium aesthetics.
+- **⚡ High-Performance Backend**: Built with **FastAPI** for ultra-fast response times and high-concurrency support.
+
+---
+
 ## 🏗️ Model Selection & Evaluation
 
 ### 🧪 Benchmarking Phase (Architecture Search)
