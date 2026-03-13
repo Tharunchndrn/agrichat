@@ -19,6 +19,7 @@ AgriChat is a professional, multimodal AI platform designed to empower farmers w
 | **Architectures Evaluated** | ResNet50, EfficientNetB0, **MobileNetV2** |
 | **Benchmarking Strategy** | 30 balanced samples per class |
 | **Best Performing Backbone** | **MobileNetV2** (4x accuracy of ResNet50 in search) |
+| **Final Product Accuracy** | **98.4%** (Trained on 54k samples) |
 | **Inference Latency** | **~400ms** (CPU / Local optimized) |
 | **Explainability Engine** | **Grad-CAM** (Visual Attention Heatmaps) |
 
