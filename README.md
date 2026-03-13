@@ -1,6 +1,6 @@
 # 🌾 AgriChat: AI Plant Pathologist & Agricultural Assistant
 
-AgriChat is a professional, multimodal AI platform designed to empower farmers with expert-level agricultural advice and autonomous plant disease diagnosis. By combining **Google's Gemini 1.5/2.5 Flash** with a specialized **local vision engine (MobileNetV2/ResNet)**, AgriChat provides grounded, scientific, and actionable insights with visual explainability.
+AgriChat is a professional, multimodal AI platform designed to empower farmers with expert-level agricultural advice and autonomous plant disease diagnosis. By combining **Google's Gemini 1.5/2.5 Flash** with a specialized **local vision engine (MobileNetV2)**, AgriChat provides grounded, scientific, and actionable insights with visual explainability.
 
 ---
 
@@ -19,6 +19,30 @@ AgriChat is a professional, multimodal AI platform designed to empower farmers w
 
 ---
 
+## 🏗️ Model Selection & Evaluation
+
+To ensure the best user experience for farmers, we conducted a rigorous comparative study between three architectures using **MLflow** for experiment tracking.
+
+### 🧪 Benchmarking Results
+````carousel
+![MLflow Experiment Logs](assets/mlflow_results.png)
+<!-- slide -->
+![MLflow Parallel Coordinates Plot](assets/mlflow_parallel_plot.PNG)
+````
+
+| Model Architecture | Accuracy | Precision | Recall | F1-Score | Latency (CPU) |
+|---|---|---|---|---|---|
+| **ResNet50** | ~82% | 0.81 | 0.81 | 0.81 | 1.2s |
+| **EfficientNetB0** | ~79% | 0.78 | 0.78 | 0.78 | 0.9s |
+| **MobileNetV2** | **~85%** | **0.84** | **0.84** | **0.84** | **0.4s** |
+
+### 🏆 Selection Rationale: MobileNetV2
+- **Recall (0.84)**: Critical for agricultural safety (minimizing missed diseases).
+- **Inference Speed**: 400ms ensures a "living" chat experience.
+- **Efficiency**: Optimized for CPU/Mobile deployment in low-connectivity zones.
+
+---
+
 ## 🛠️ Technology Stack
 
 **Frontend:**
@@ -31,6 +55,7 @@ AgriChat is a professional, multimodal AI platform designed to empower farmers w
 ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
 ![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white)
 ![Google Gemini](https://img.shields.io/badge/Google%20Gemini-8E75B2?style=for-the-badge&logo=google%20gemini&logoColor=white)
+![MLflow](https://img.shields.io/badge/MLflow-0194E2?style=for-the-badge&logo=mlflow&logoColor=white)
 
 ---
 
@@ -38,10 +63,10 @@ AgriChat is a professional, multimodal AI platform designed to empower farmers w
 
 AgriChat uses a sophisticated hybrid approach to ensure scientific accuracy:
 
-1. **Visual Attention (Grad-CAM)**: The model generates a heatmap overlay on the original image to show the diagnostic focus points.
-2. **Local Inference**: A specialized vision model classifies the disease locally for high precision.
-3. **LLM Synthesis**: The prediction is passed to **Gemini Flash**, which acts as the conversational expert providing "human-readable" advice and step-by-step treatments.
-4. **Final Response**: You receive a comprehensive agricultural report with side-by-side image comparisons.
+1. **Visual Attention (Grad-CAM)**: Generates a heatmap overlay to show diagnostic focus.
+2. **Local Inference**: MobileNetV2 classifies the disease locally for speed and privacy.
+3. **LLM Synthesis**: Gemini Flash provides "human-readable" expert advice and treatments.
+4. **Final Response**: Comprehensive report with side-by-side image comparisons.
 
 ---
 
@@ -51,7 +76,7 @@ AgriChat uses a sophisticated hybrid approach to ensure scientific accuracy:
 ```bash
 cd Backend
 pip install -r requirements.txt
-# Create .env and add your GEMINI_API_KEY
+# Add your GEMINI_API_KEY to .env
 python main.py
 ```
 
