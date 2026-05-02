@@ -1,0 +1,17 @@
+fastapi
+uvicorn
+google-generativeai
+python-dotenv
+python-multipart
+torch
+transformers
+pillow
+datasets
+accelerate
+torchvision
+mlflow
+scikit-learn
+pandas
+grad-cam>=1.5.0  
+opencv-python>=4.10.0  
+ 
