@@ -72,7 +72,7 @@ class AgriChatModels:
             self.vision_model = AutoModelForImageClassification.from_pretrained(hf_model_id)
             self.vision_processor = AutoImageProcessor.from_pretrained(hf_model_id)
             self.vision_model.eval()
-            print("✅ Success: Pretrained Vision Engine is active.")
+            print("SUCCESS: Pretrained Vision Engine is active.")
         except Exception as e:
             print(f"HuggingFace download failed ({e}), trying local fallback...")
             # Fallback to local model
@@ -89,11 +89,11 @@ class AgriChatModels:
                     self.vision_model = AutoModelForImageClassification.from_pretrained(model_source)
                     self.vision_processor = AutoImageProcessor.from_pretrained(model_source)
                     self.vision_model.eval()
-                    print(f"✅ Fallback: Loaded local model from {model_source}")
+                    print(f"Fallback: Loaded local model from {model_source}")
                 except Exception as e2:
-                    print(f"❌ All model loading failed: {e2}")
+                    print(f"ERROR: All model loading failed: {e2}")
             else:
-                print("❌ Error: No model available.")
+                print("ERROR: No model available.")
 
     def generate_gradcam(self, pil_image, input_tensor):
         try:
